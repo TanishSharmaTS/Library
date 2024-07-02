@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <title>Library</title>
+</head>
+<body>
+    <button id="add-book">Add book</button>
+
+    <form action="#">
+        <input type="text" maxlength="255" id="title" name="title" placeholder="Title" required>
+
+        <input type="text" maxlength="124" id="author" name="author" placeholder="Author" required>
+
+        <input type="number" min="0" id="no_of_pages" name="no_of_pages" placeholder="Pages" required>
+
+        <label for="read_status">Have you read it?</label>
+        <input type="checkbox" id="read_status" name="read_status">
+
+        <button type="submit" id="submit-btn">Submit</button>
+    </form>
+    
+    <div class="book-list">
+
+    </div>
+</body>
+</html>
