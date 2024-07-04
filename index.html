@@ -8,23 +8,33 @@
     <title>Library</title>
 </head>
 <body>
-    <button id="add-book">Add book</button>
 
-    <form action="#">
-        <input type="text" maxlength="255" id="title" name="title" placeholder="Title" required>
+    <header>
+        <h1>Odin Library</h1>
+    </header>
 
-        <input type="text" maxlength="124" id="author" name="author" placeholder="Author" required>
+    <main>
+        <button id="add-book">+ Add book</button>
 
-        <input type="number" min="0" id="no_of_pages" name="no_of_pages" placeholder="Pages" required>
-
-        <label for="read_status">Have you read it?</label>
-        <input type="checkbox" id="read_status" name="read_status">
-
-        <button type="submit" id="submit-btn">Submit</button>
-    </form>
+        <dialog id="form-container">
+            <form action="#" id="myform">
     
-    <div class="book-list">
-
-    </div>
+                <button type="button" id="close-form-btn">X</button>
+    
+                <input type="text" maxlength="255" id="title" name="title" placeholder="Title" required>
+        
+                <input type="text" maxlength="124" id="author" name="author" placeholder="Author" required>
+        
+                <input type="number" min="0" id="pages" name="pages" placeholder="Pages" required>
+        
+                <label for="read_status" id="checkbox_label">Have you read it?<input type="checkbox" id="read_status" name="read_status" checked></label>     
+        
+                <button type="submit" id="submit-btn">Submit</button>
+            </form>
+        </dialog>
+        <div id="book-list">
+    
+        </div>
+    </main>
 </body>
 </html>
