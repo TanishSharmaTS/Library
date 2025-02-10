@@ -1,122 +1,93 @@
-const addButton = document.getElementById('add-book')
-const dialog = document.getElementById('form-container')
+const displayBooks = document.querySelector('.display-books');
+const addBooksBtn = document.querySelector('#add-books-btn');
+const closeFormBtn = document.querySelector('#close-form-btn');
+const bookFormDialog = document.querySelector('.form-container');
+const bookForm = document.querySelector('#input-form');
 
-addButton.addEventListener('click', () => {
-    dialog.show();
-})
-
-const closeForm = document.getElementById('close-form-btn')
-
-closeForm.addEventListener('click', () => {
-    dialog.close();
-})
-
-let form = document.getElementById('myform')
 const myLibrary = [];
+let id = 1;
 
-function Book(title, author, pages, read_status) {
-    this.id = Book.id;
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read_status = read_status;
-    Book.id++;
-}
+class Book{
 
-Object.defineProperty(Book, 'id', {
-    value: 0,
-    writable: true,
-    enumerable: true,
-})
+    constructor(title, author, pages, read){
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+        this.id = id++;
+    }
 
-function addBookToLibrary(newBook) {
-    myLibrary.push(newBook)
-}
-
-
-form.addEventListener('submit', (e) => {
-
-    e.preventDefault();
-    const titleInput = document.getElementById('title').value
-    const authorInput = document.getElementById('author').value
-    const pagesInput = document.getElementById('pages').value
-    const readStatusInput = document.getElementById('read_status').checked === true ? 'read' : 'not_read'
-
-    const newBook = new Book(titleInput, authorInput, pagesInput, readStatusInput)
-
-    addBookToLibrary(newBook)
-    form.reset()
-    dialog.close();
-    displayBooks()
-})
-
-
-Book.prototype.toggleButton = function () {
-    this.read_status = this.read_status === 'read' ? 'not_read' : 'read'
-}
-
-function deleteBook(BookId) {
-    let index = myLibrary.findIndex((book) => book.id === BookId)
-    if (index !== -1) {
-        myLibrary.splice(index, 1)
+    toggle(){
+        this.read = !this.read;
+        displayAllBooks();
     }
 }
 
-const lists = document.getElementById('book-list')
+addBooksBtn.addEventListener('click', () => {
+    bookFormDialog.showModal();
+});
 
-function displayBooks() {
-    lists.textContent = ''
-    myLibrary.forEach(element => {
-        const listItem = document.createElement('div')
-        listItem.classList.add('books')
+closeFormBtn.addEventListener('click', () => {
+    bookFormDialog.close();
+});
 
-        const title = document.createElement('h3')
-        title.textContent = element.title
+bookForm.addEventListener('submit', (e) => {
+    e.preventDefault();  
+    
+    if (!bookForm.checkValidity()) {
+        bookForm.reportValidity();  // Shows browser's validation messages
+        return;
+    }
 
-        const author = document.createElement('p')
-        author.textContent = element.author
+    const title = document.querySelector('#title').value;
+    const author = document.querySelector('#author').value;
+    const pages = document.querySelector('#pages').value;
+    const readStatus = document.querySelector('#read').checked;
 
-        const pages = document.createElement('p')
-        pages.textContent = element.pages
+    const myBook = new Book(title, author, pages, readStatus);
+    addBookToLibrary(myBook);
 
-        const read_status = document.createElement('button')
-        const read_status_text = document.createElement('span')
-        read_status_text.textContent = element.read_status === 'read' ? 'Read' : 'Not Read'
+    bookForm.reset(); 
+    bookFormDialog.close(); 
+});
 
-        read_status.appendChild(read_status_text)
-        read_status.classList.add(element.read_status === 'read' ? 'read' : 'not-read')
-
-        const deleteBtn = document.createElement('button')
-        deleteBtn.textContent = "Remove Book"
-        deleteBtn.classList.add('delete-btn')
-
-
-        read_status.addEventListener('click', () => {
-            element.toggleButton()
-            displayBooks()
-        })
-
-        deleteBtn.addEventListener('click', () => {
-            deleteBook(element.id)
-            displayBooks()
-        })
-
-        listItem.appendChild(title)
-        listItem.appendChild(author)
-        listItem.appendChild(pages)
-        listItem.appendChild(read_status)
-        listItem.appendChild(deleteBtn)
-        lists.appendChild(listItem)
-
-    });
+function addBookToLibrary(book) {
+    myLibrary.push(book);
+    displayAllBooks();
 }
 
-// Demo Books
+function displayAllBooks() {
+    displayBooks.innerHTML = ''; // Clears previous books
+    
+    myLibrary.forEach((book) => {
+        const books = document.createElement("div");
+        books.classList.add('books');
 
-const book1 = new Book('Atomic Habits', 'James Clear', 255, 'read')
-const book2 = new Book('The Alchemist', 'Paulo Coelho', 158, 'not_read')
+        const title = document.createElement("h3");
+        const author = document.createElement("p");
+        const pages = document.createElement("p");
 
-myLibrary.push(book1)
-myLibrary.push(book2)
+        title.textContent = book.title;
+        author.textContent = book.author;
+        pages.textContent = `${book.pages} pages`;
 
-displayBooks()
+        const toggleRead = document.createElement("button");
+        toggleRead.classList.add(book.read ? "read-btn" : "not-read-btn");
+        toggleRead.textContent = book.read ? "Read" : "Not Read";
+        toggleRead.addEventListener('click', () => {
+            book.toggle();
+            displayAllBooks();
+        });
+
+        const deleteBook = document.createElement("button");
+        deleteBook.textContent = "Delete";
+        deleteBook.classList.add("delete-btn");
+        deleteBook.addEventListener('click', () => {
+            myLibrary.splice(myLibrary.indexOf(book), 1);
+            displayAllBooks();
+        });
+
+        books.append(title, author, pages, toggleRead, deleteBook);
+        displayBooks.appendChild(books);
+    });
+}

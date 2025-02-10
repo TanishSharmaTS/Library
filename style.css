@@ -1,163 +1,122 @@
-*,
-*::after,
-*::before{
+body{
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    background-color: #f4f4f4;
+    text-align: center;
 }
 
 header{
-    width: 100%;
-    text-align: center;
-    background-color: #55AD9B;
-    color: #F1F8E8;
-    padding: 15px;
-    height: 10vh;
-}
-
-main{
-    display: flex;
-    flex-direction: column;
-    background-color: #F1F8E8;
-    min-height: 90vh;
-}
-
-#add-book{
-    margin-top: 10px;
-    align-self: center;
-    width: 150px;
-    border-radius: 20px;
-    border: none;
     padding: 10px;
+    font-size: 2rem;
+    font-weight: bold;
+    background-color: #C14600;
+    color: #FEF9E1;
+}
+
+
+#add-books-btn{
+    margin-top: 20px;
     font-size: 1.2rem;
-    cursor: pointer;
-    background-color: #D8EFD3;
-    color: #3c976a;
-}
-
-#add-book:hover{
-    background-color:#FDFFE2;
-}
-
-#form-container{
+    font-weight: 500;
+    width: 150px;
+    background-color: #FF9D23;
+    color: white;
     border: none;
-    border-radius: 20px;
-    margin: 0 auto;
+    border-radius: 10px;
+    padding: 5px;
+
 }
 
-#myform{
+#input-form{
     display: flex;
     flex-direction: column;
-    padding: 20px 30px;
+    width: 400px;
+    text-align: start;
+    margin-top: 10px;
+    gap: 10px;
+}
+
+#input-form > label{
+    margin-bottom:  -8px;
+}
+
+.form-container {
+    margin-top: 60px;
+    border: 1px solid gray;
+    border-radius: 5px;
+}
+
+.form-container > #close-form-btn{
+    align-items: end;
+    border: none;
+    background-color: white;
+    font-weight: bold;
+    width: 100%;
+    text-align: end;
+    color: red;
+    font-size: 1.2rem;
+}
+
+#form-submit{
+    font-size: 1.1rem;
+    background-color: #7886C7;
+    color: black;
+    border: 1px solid gray;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.display-books {
+    padding: 10px;
+    margin: 10px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 20px;
 }
 
-#myform input{
-    border: none;
-    background-color: #f1f1f1;
-    border-radius: 10px;
-    padding: 10px;
-    width: 100%;
-}
-
-
-#myform input:focus:valid{
-    outline: 2px solid green;
-}
-
-#myform input:focus:invalid{
-    outline: 2px solid red;
-}
-
-#myform #close-form-btn{
-    background-color: white;
-    width: 20px;
-    align-self: flex-end;
-    font-weight: 700;
-    font-size: 1.2rem;
-    border: none;
-    cursor: pointer;
-}
-
-#myform #close-form-btn:hover{
-    color: grey;
-}
-
-#checkbox_label input{
-    width: 30px;
-}
-
-#submit-btn{
-    border: none;
-    background-color: #55AD9B;
-    color: white;
-    border-radius: 20px;
-    width: 200px;
-    height: 40px;
-    font-size: 1.1rem;
-    cursor: pointer;
-}
-
-#submit-btn:hover{
-    background-color: #95D2B3;
-}
-
-#book-list{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    background-color: #ffffff;
-    margin: 20px;
-    border-radius: 30px;
-    padding: 30px;
-}
-
 .books{
-    border-radius: 20px;
-    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-    padding: 30px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    font-size: 1.4rem;
-}
-
-.not-read{
-    background-color: red;
-}
-
-.read{
-    background-color: rgb(143, 190, 71);
-}
-
-.not-read, .read, .delete-btn{
-    align-self: center;
-    height: 40px;
-    width: 300px;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-    color: white;
-    font-size: 1.1rem;
+    align-items: center;
+    gap: 5px;
+    border: 1px solid gray;
+    border-radius: 20px;
+    padding: 10px;
 }
 
 .delete-btn{
+    background-color: rgb(224, 215, 215);
     color: black;
+    font-size: medium;
+    width: 200px;
+    border: none;
+    border-radius: 10px;
 }
 
-.not-read:hover, .read:hover, .delete-btn:hover{
-    opacity: .6;
+.not-read-btn{
+    background-color: rgb(226, 99, 99);
+    color: white;
+    font-size: medium;
+    width: 200px;
+    border: none;
+    border-radius: 10px;
 }
 
-@media (max-width:438px) {
-    #book-list{
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    }
+.read-btn{
+    background-color: rgb(46, 164, 119);
+    color: white;
+    font-size: medium;
+    width: 200px;
+    border: none;
+    border-radius: 10px;
 
-    .not-read, .read, .delete-btn{
+}
 
-        height: 25px;
-        width: 150px;
+@media (max-width:420px){
 
+
+    #input-form{
+        width: 200px;
     }
 }
